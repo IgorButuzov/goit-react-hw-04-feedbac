@@ -1,0 +1,13 @@
+.buttons{
+    display: flex;
+    gap: 10px;
+    margin-left: 20px;
+    width: 330px;
+    justify-content: center;
+}
+button{
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 25px;
+    background-color: antiquewhite;
+ }

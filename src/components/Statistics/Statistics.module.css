@@ -1,0 +1,23 @@
+.statList{
+    color: blue;
+    border: solid 1px;
+    border-radius: 10px;
+}
+ul,li,p{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.statBox{
+    margin-left: 20px; 
+    width: 330px;
+    text-align: center;
+}
+.statTitle{
+    margin-top: 20px;
+    font-size: 25px;
+    font-weight: 500;
+}
+.statPos{
+    font-weight: 500;
+}
