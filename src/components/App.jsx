@@ -1,74 +1,65 @@
-import React from 'react';
+import {useState} from 'react';
 import PropTypes from "prop-types";
 
 import Statistics from 'components/Statistics/Statistics'
 import FeedbackOpt from 'components/FeedbackOptions/FeedbackOpt'
 import SectionTitle from 'components/SectionTitle/SectionTitle'
 
-class App extends React.Component {
-  static defaultProps = {
-    startValue: 0,
-  }
+const App = ({startValue}) => {
+  
+  const [good, setGood] = useState(startValue);
+  const [neutral, setNeutral] = useState(startValue);
+  const [bad, setBad] = useState(startValue);
+  
+const onLiveFeddback =e=>{
+const buttonName = e.target.innerText;
 
-  static propTypes = {
-    startValue: PropTypes.number.isRequired,
-  };
+switch (buttonName) {
+  case 'Good':
+    setGood(state => state + 1);
+    break;
+    case 'Neutral':
+    setNeutral(state => state + 1);
+    break;
+    case 'Bad':
+    setBad(state => state + 1);
+    break;
+
+  default:
+    break;
+}
+};
   
-  state = {
-    good: this.props.startValue,
-    neutral: this.props.startValue,
-    bad: this.props.startValue,
-  }
-  
-  onGoodClick = () => {
-    this.setState(prevValue => {
-      return {
-        good: prevValue.good + 1,
-      };
-    })
-  };
-  onNeutralClick = () => {
-    this.setState(prevValue => {
-      return {
-        neutral: prevValue.neutral + 1,
-      };
-    })
-  };
-  onBadClick = () => {
-    this.setState(prevValue => {
-      return {
-        bad: prevValue.bad + 1,
-      };
-    })
-  };
-  countTotalFeedback = () => {
-    const { good, neutral, bad } = this.state;
+  const countTotalFeedback = () => {
     return good + neutral + bad;
   };
-  countPositiveFeedbackPercentage = () => {
-    const { good, neutral, bad } = this.state;
+  const countPositiveFeedbackPercentage = () => {
     return Math.round((good * 100) / (good + neutral + bad));
   };
   
-   render () {
+   
     return (
       <>
       <SectionTitle />
       <FeedbackOpt 
-      onGoodClick = {this.onGoodClick}
-      onNeutralClick = {this.onNeutralClick}
-      onBadClick = {this.onBadClick}
+      onGoodClick = {onLiveFeddback}
+      onNeutralClick = {onLiveFeddback}
+      onBadClick = {onLiveFeddback}
       />
       <Statistics 
-      good = {this.state.good}
-      neutral = {this.state.neutral}
-      bad = {this.state.bad}
-      total = {this.countTotalFeedback()}
-      positive = {this.countPositiveFeedbackPercentage()}
+      good = {good}
+      neutral = {neutral}
+      bad = {bad}
+      total = {countTotalFeedback()}
+      positive = {countPositiveFeedbackPercentage()}
       />
       </>
     ); 
-   }
+   
   }
+
+  App.propTypes = {
+    startValue: PropTypes.number.isRequired,
+  };
   
   export default App;
